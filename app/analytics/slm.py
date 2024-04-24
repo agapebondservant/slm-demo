@@ -49,32 +49,31 @@ def ingest_metadata_from_huggingface_model(model_name: str):
 
 
 def publish_slm(repo_name: str, pretrained_model_name: str):
-    with mlflow.start_run(run_name='publish_model', nested=True):
-        # TODO: DO NOT HARDCODE!!!
-        clone_url = (f"https://tanzuml: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@huggingface.co/"
-                     f"tanzuhuggingface/{repo_name}")
+    # TODO: DO NOT HARDCODE!!!
+    clone_url = (f"https://tanzuml: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@huggingface.co/"
+                 f"tanzuhuggingface/{repo_name}")
 
-        model_name = f"tanzuml/{repo_name}"
+    model_name = f"tanzuml/{repo_name}"
 
-        print(f"=====================\nSaving model {model_name}...\n=====================\n")
+    print(f"=====================\nSaving model {model_name}...\n=====================\n")
 
-        model = og.Model(f'{pretrained_model_name}')
-        tokenizer = og.Tokenizer(model)
-        model.save_pretrained(pretrained_model_name)
-        tokenizer.save_pretrained(pretrained_model_name)
+    model = og.Model(f'{pretrained_model_name}')
+    tokenizer = og.Tokenizer(model)
+    model.save_pretrained(pretrained_model_name)
+    tokenizer.save_pretrained(pretrained_model_name)
 
-        os.system(f"git clone {clone_url}; "
-                  f"cd {repo_name};"
-                  "git config --global user.email 'tanzuml@example.com';"
-                  "git config --global user.name 'Tanzu ML';"
-                  f" git lfs install; "
-                  f"huggingface-cli lfs-enable-largefiles .;"
-                  f"mv ../{pretrained_model_name}/* .;"
-                  f"rm -rf ../{pretrained_model_name}; "
-                  "git add .;"
-                  "git commit -m 'Uploaded pretrained model';"
-                  f"git push; "
-                  f"cd -; rm -rf {repo_name}")
+    os.system(f"git clone {clone_url}; "
+              f"cd {repo_name};"
+              "git config --global user.email 'tanzuml@example.com';"
+              "git config --global user.name 'Tanzu ML';"
+              f" git lfs install; "
+              f"huggingface-cli lfs-enable-largefiles .;"
+              f"mv ../{pretrained_model_name}/* .;"
+              f"rm -rf ../{pretrained_model_name}; "
+              "git add .;"
+              "git commit -m 'Uploaded pretrained model';"
+              f"git push; "
+              f"cd -; rm -rf {repo_name}")
 
 
 def promote_model_to_staging(model_name, pipeline_name):
