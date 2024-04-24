@@ -51,10 +51,10 @@ def ingest_metadata_from_huggingface_model(model_name: str):
 def publish_slm(repo_name: str, pretrained_model_name: str):
     with mlflow.start_run(run_name='publish_model', nested=True):
         # TODO: DO NOT HARDCODE!!!
-        clone_url = (f"https://tanzuhuggingface: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@huggingface.co/"
+        clone_url = (f"https://tanzuml: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@huggingface.co/"
                      f"tanzuhuggingface/{repo_name}")
 
-        model_name = f"tanzuhuggingface/{repo_name}"
+        model_name = f"tanzuml/{repo_name}"
 
         print(f"=====================\nSaving model {model_name}...\n=====================\n")
 
@@ -65,8 +65,8 @@ def publish_slm(repo_name: str, pretrained_model_name: str):
 
         os.system(f"git clone {clone_url}; "
                   f"cd {repo_name};"
-                  "git config --global user.email 'tanzuhuggingface@example.com';"
-                  "git config --global user.name 'Tanzu Huggingface';"
+                  "git config --global user.email 'tanzuml@example.com';"
+                  "git config --global user.name 'Tanzu ML';"
                   f" git lfs install; "
                   f"huggingface-cli lfs-enable-largefiles .;"
                   f"mv ../{pretrained_model_name}/* .;"
@@ -124,7 +124,7 @@ def select_base_llm(prioritized_models: list[str], model_stage: str = 'Productio
 # TODO: Do not hardcode mappings!!!
 def _llm_model_name_mappings():
     return {
-        'tanzuhuggingface-open-llama-7b-open-instruct-GGML': 'TheBloke/open-llama-7b-open-instruct-GGML',
-        'tanzuhuggingface-testrepo': 'tanzuhuggingface/dev'
+        'tanzuml-open-llama-7b-open-instruct-GGML': 'TheBloke/open-llama-7b-open-instruct-GGML',
+        'tanzuml-testrepo': 'tanzuml/dev'
     }
 

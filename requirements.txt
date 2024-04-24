@@ -63,9 +63,7 @@ sentencepiece
 urllib3<2
 GitPython
 pydantic==2.6.0
-#onnxruntime-genai
-https://files.pythonhosted.org/packages/97/44/b9f0190001c1a3afe117c19cd33bfae4512ba5f847e0fe340ca1d3cd54ff/onnxruntime_genai-0.1.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
-#--extra-index-url=https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/pypi/simple/
-#--extra-index=url=https://pypi.org/project/onnxruntime-genai/
-#--pre
+onnxruntime-genai
+--extra-index-url=https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/pypi/simple/
+--pre
 .

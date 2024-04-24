@@ -2,6 +2,7 @@
 
 ## Contents
 1. [Set up HuggingFace model repo](#huggingfacerepo)
+2. [Set up Gemfire VectorDatabase instance](#gemfirevectordb)
 
 ### Set up HuggingFace model repo<a name="huggingfacerepo"/>
 #### Prequisites:
@@ -16,7 +17,7 @@ pip install -r requirements.txt
 2. Set up SLM repo:
 ```
 source .env
-export REPO_NAME=tanzu #your repo name
+export REPO_NAME=phi3-4k #your repo name
 export SLM_NAME=microsoft/Phi-3-mini-4k-instruct-onnx
 resources/scripts/create-huggingface-model-repo.sh $REPO_NAME
 ```
@@ -33,5 +34,7 @@ resources/scripts/create-huggingface-model-repo.sh $VMWARE_LLAMA_REPO_NAME
 resources/scripts/save-dummy-huggingface-model-text-generation.sh $VMWARE_LLAMA_REPO_NAME
 $(which python3)  -c "from app.analytics import model_customization; import os; \
                         os.environ['MLFLOW_EXPERIMENT_NAME']='question_answering_model_team_main'; \
-                        model_customization.promote_model_to_staging('tanzuhuggingface/open-llama-7b-open-instruct-GGML', 'text-generation')"
+                        model_customization.promote_model_to_staging('tanzuml/open-llama-7b-open-instruct-GGML', 'text-generation')"
 ```
+
+### Set up Gemfire VectorDatabase instance<a name="gemfirevectordb"/>
