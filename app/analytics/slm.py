@@ -13,6 +13,7 @@ import logging
 import traceback
 import requests
 import onnxruntime_genai as og
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 load_dotenv()
 
@@ -51,14 +52,14 @@ def ingest_metadata_from_huggingface_model(model_name: str):
 def publish_slm(repo_name: str, pretrained_model_name: str):
     # TODO: DO NOT HARDCODE!!!
     clone_url = (f"https://tanzuml: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@huggingface.co/"
-                 f"tanzuhuggingface/{repo_name}")
+                 f"tanzuml/{repo_name}")
 
     model_name = f"tanzuml/{repo_name}"
 
     print(f"=====================\nSaving model {model_name}...\n=====================\n")
 
-    model = og.Model(f'{pretrained_model_name}')
-    tokenizer = og.Tokenizer(model)
+    model = AutoModelForCausalLM.from_pretrained(f'{pretrained_model_name}', trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(f'{pretrained_model_name}')
     model.save_pretrained(pretrained_model_name)
     tokenizer.save_pretrained(pretrained_model_name)
 
